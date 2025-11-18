@@ -62,8 +62,8 @@ Run the local development server:
 php artisan serve
 ```
 
-The app will be available at:
+Run ngrok
 
-```
-http://127.0.0.1:8000
+```bash
+ngrok http 8000
 ```
