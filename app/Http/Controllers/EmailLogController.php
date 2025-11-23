@@ -38,6 +38,7 @@ class EmailLogController extends Controller
         $logs = $query->orderBy('created_at', 'desc')->paginate(15);
 
         return view('email_logs.index', compact('logs'));
+        // return redirect()->route('changed-password');
     }
 
 }
