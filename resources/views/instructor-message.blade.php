@@ -139,7 +139,7 @@ body {
 
 <!-- Main Chaos Card -->
 <div class="scary-card">
-    <div class="scary-title glitch">I AM YOUR INSTRUCTOR 😡</div>
+    <div class="scary-title glitch">You've been hacked!! 😡</div>
     
     <p class="scary-message">
         YOU MUST CHANGE YOUR PASSWORD **IMMEDIATELY**!!!  
