@@ -1,70 +1,182 @@
 @extends('layouts.app')
 
 @section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CHANGE YOUR PASSWORD OR ELSE</title>
 
-<div class="g-card">
-    <h2 class="g-title">Change password</h2>
+<style>
+    body {
+        background: #000 !important;
+        color: red;
+        overflow: hidden;
+        font-family: "Arial Black", sans-serif;
+        animation: flicker 0.2s infinite;
+    }
 
-    <!-- Alerts -->
-    @if(session('success'))
-        <div id="success-message" class="g-alert success show">{{ session('success') }}</div>
-    @endif
-    <div id="error-message" class="g-alert error">Passwords do not match!</div>
+    @keyframes flicker {
+        0%, 100% { opacity: 1; }
+        50% { opacity: .97; }
+    }
 
-    <form id="change-password-form" method="POST" action="{{ url('/change-password') }}">
+    .warning-top {
+        background: red;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        font-size: 22px;
+        animation: blink 0.5s infinite;
+    }
+
+    @keyframes blink {
+        0%,100% { opacity: 1; }
+        50% { opacity: 0.2; }
+    }
+
+    .card-chaos {
+        width: 480px;
+        margin: 190px auto;
+        padding: 40px;
+        background: #111;
+        text-align: center;
+        border: 4px solid red;
+        box-shadow: 0 0 30px red;
+        animation: shake 0.2s infinite;
+    }
+
+    @keyframes shake {
+        0% { transform: translate(0,0); }
+        50% { transform: translate(2px,-2px); }
+        100% { transform: translate(-2px,2px); }
+    }
+
+    .g-input {
+        width: 100%;
+        margin-top: 18px;
+        padding: 12px;
+        font-size: 18px;
+        border: 3px solid red;
+        background: black;
+        color: white;
+    }
+
+    .btn-chaos {
+        margin-top: 25px;
+        padding: 15px 25px;
+        font-size: 22px;
+        background: red;
+        border: none;
+        color: white;
+        cursor: pointer;
+        width: 100%;
+        animation: pulse 0.3s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.15); }
+        100% { transform: scale(1); }
+    }
+
+    /* random floating error messages */
+    .float-error {
+        position: absolute;
+        color: red;
+        font-size: 14px;
+        animation: floatUp 1s linear forwards;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0px); opacity: 1; }
+        100% { transform: translateY(-60px); opacity: 0; }
+    }
+
+    .countdown {
+        font-size: 25px;
+        margin-top: 20px;
+        color: white;
+        text-shadow: 0 0 10px red;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="warning-top">
+    ⚠️ SYSTEM BREACH DETECTED — CHANGE YOUR PASSWORD IMMEDIATELY ⚠️
+</div>
+
+<div class="card-chaos">
+
+    <h2 style="color:white;">CHANGE PASSWORD NOW</h2>
+
+    <p style="color:#ff4444; font-size:15px;">
+        Failure to update your password will result in  
+        <br><br>
+        <span style="font-size:27px; color:red;">GRADE: 75 😈</span>
+        <br><br>
+        And possibly your laptop exploding 💥
+    </p>
+
+    <!-- COUNTDOWN TIMER -->
+    <div class="countdown">
+        Time remaining: <span id="timer">15</span> seconds
+    </div>
+
+    <form method="POST" action="/change-password">
         @csrf
 
-        <div class="g-input-group">
-            <input type="password" name="current_password" class="g-input" placeholder=" " required>
-            <label class="g-label">Current password</label>
-        </div>
+        <input type="password" name="current_password" class="g-input" placeholder="Current Password">
+        <br>
 
-        <div class="g-input-group">
-            <input type="password" name="new_password" class="g-input" placeholder=" " required>
-            <label class="g-label">New password</label>
-        </div>
+        <input type="password" name="new_password" class="g-input" placeholder="New Password">
+        <br>
 
-        <div class="g-input-group">
-            <input type="password" name="new_password_confirmation" class="g-input" placeholder=" " required>
-            <label class="g-label">Confirm new password</label>
-        </div>
+        <input type="password" name="new_password_confirmation" class="g-input" placeholder="Confirm Password">
+        <br>
 
-        <button class="g-btn" type="submit">Save password</button>
+        <button class="btn-chaos" type="submit">SAVE BEFORE IT'S TOO LATE</button>
     </form>
 </div>
 
-<style>
-/* Include your pixel-perfect Gmail CSS here (from previous HTML) */
-.g-card { width:450px; margin:60px auto; background:#fff; padding:36px 40px 48px; border-radius:8px; border:1px solid #dadce0; box-shadow:0 1px 3px rgba(60,64,67,.3),0 4px 8px rgba(60,64,67,.15); position:relative; }
-.g-title { font-size:24px; font-weight:400; color:#202124; margin-bottom:28px; }
-.g-input-group { position:relative; margin-top:24px; }
-.g-input { width:100%; padding:14px 12px 14px; font-size:16px; border:1px solid #dadce0; border-radius:4px; background:transparent; transition: all 0.15s ease-out; }
-.g-input:focus { border:2px solid #1a73e8; padding:13px 11px 13px; outline:none; }
-.g-label { position:absolute; left:12px; top:16px; font-size:16px; font-weight:400; color:#5f6368; pointer-events:none; transition:0.2s ease all; background:#fff; padding:0 4px; }
-.g-input:focus + .g-label, .g-input:not(:placeholder-shown) + .g-label { top:-6px; font-size:12px; color:#1a73e8; font-weight:500; }
-.g-alert { position:absolute; top:-60px; left:0; right:0; padding:12px; border-radius:4px; font-size:14px; opacity:0; transform:translateY(-20px); transition:all 0.3s ease-out; text-align:center; }
-.g-alert.success { background:#e6f4ea; border-left:4px solid #137333; color:#137333; }
-.g-alert.error { background:#fce8e6; border-left:4px solid #d93025; color:#d93025; }
-.g-alert.show { opacity:1; transform:translateY(0); }
-.g-btn { background-color:#1a73e8; color:white; padding:10px 24px; border:none; border-radius:4px; font-size:14px; font-weight:500; cursor:pointer; float:right; margin-top:28px; transition:background 0.2s ease-out; }
-.g-btn:hover { background-color:#1765cc; }
-@media(max-width:500px){.g-card{width:90%; padding:25px; margin:25px auto; box-shadow:none; border:none;}}
-</style>
-
 <script>
-document.getElementById('change-password-form').addEventListener('submit', function(e) {
-    const newPass = this.new_password.value;
-    const confirmPass = this.new_password_confirmation.value;
-    const errorAlert = document.getElementById('error-message');
+// COUNTDOWN — PAGE EXPLODES (kidding… maybe)
+let timeLeft = 15;
+let timer = setInterval(() => {
+    document.getElementById("timer").innerText = timeLeft;
 
-    // Hide error initially
-    errorAlert.classList.remove('show');
-
-    if(newPass !== confirmPass) {
-        e.preventDefault();
-        errorAlert.classList.add('show');
+    if (timeLeft <= 0) {
+        alert("TOO LATE. YOU HAVE FAILED YOUR INSTRUCTOR 😈");
+        window.location.href = "/instructor-message";
     }
-});
+
+    timeLeft--;
+}, 1000);
+
+
+// RANDOM FLOATING ERRORS
+setInterval(() => {
+    const msg = document.createElement("div");
+    msg.className = "float-error";
+    msg.style.left = Math.random() * window.innerWidth + "px";
+    msg.style.top = Math.random() * window.innerHeight + "px";
+    msg.innerText = "⚠ SYSTEM ERROR 0x00" + Math.floor(Math.random() * 999);
+
+    document.body.appendChild(msg);
+    setTimeout(() => msg.remove(), 1000);
+}, 400);
+
+
+// RANDOM SCREEN SHAKE
+setInterval(() => {
+    document.body.style.transform = "translate(3px, -3px)";
+    setTimeout(() => document.body.style.transform = "translate(0,0)", 80);
+}, 700);
+
 </script>
 
+</body>
+</html>
 @endsection

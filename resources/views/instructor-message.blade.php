@@ -1,194 +1,97 @@
 @extends('layouts.app')
 
 @section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MESSAGE FROM YOUR INSTRUCTOR</title>
 
 <style>
-body {
-    background: black;
-    color: white;
-    font-family: 'Roboto', sans-serif;
-    overflow: hidden;
-    position: relative;
-}
+    body {
+        background: #111 !important;
+        color: white;
+        font-family: "Arial Black", sans-serif;
+        overflow: hidden;
+    }
 
-/* Screen flickering */
-@keyframes flicker {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
-    20%, 22%, 24%, 55% { opacity: 0.3; }
-}
-body {
-    animation: flicker 0.12s infinite;
-}
+    .ad {
+        position: absolute;
+        background: yellow;
+        color: black;
+        padding: 10px;
+        font-size: 14px;
+        border: 2px solid red;
+        transform: rotate(-2deg);
+        animation: shake 0.3s infinite;
+        pointer-events: none;
+    }
 
-/* Glitch text animation */
-@keyframes glitch {
-    0% { clip-path: inset(0 0 0 0); }
-    20% { clip-path: inset(20% 0 40% 0); }
-    40% { clip-path: inset(40% 0 20% 0); }
-    60% { clip-path: inset(60% 0 10% 0); }
-    80% { clip-path: inset(10% 0 60% 0); }
-    100% { clip-path: inset(0 0 0 0); }
-}
+    @keyframes shake {
+        0% { transform: rotate(-2deg) translate(0,0); }
+        50% { transform: rotate(3deg) translate(2px,-2px); }
+        100% { transform: rotate(-2deg) translate(-2px,2px); }
+    }
 
-/* Glitch noise overlay */
-.noise {
-    pointer-events: none;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif');
-    background-size: cover;
-    opacity: 0.2;
-    mix-blend-mode: screen;
-    z-index: 999;
-}
+    .card-chaos {
+        width: 500px;
+        margin: 120px auto;
+        background: #222;
+        padding: 40px;
+        text-align: center;
+        border-radius: 8px;
+        border: 3px solid red;
+        box-shadow: 0 0 20px red;
+    }
 
-/* Floating warnings */
-.warning {
-    position: absolute;
-    color: red;
-    font-weight: bold;
-    font-size: 22px;
-    opacity: 0.9;
-    animation: float 4s infinite;
-}
+    .btn-chaos {
+        margin-top: 20px;
+        padding: 15px 25px;
+        font-size: 18px;
+        background: red;
+        border: none;
+        color: white;
+        cursor: pointer;
+        animation: btnPulse 0.3s infinite;
+    }
 
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
-    100% { transform: translateY(0px); }
-}
-
-/* Random glitch text */
-.glitch-text {
-    position: absolute;
-    color: #ff4444;
-    font-size: 18px;
-    animation: glitch 0.4s infinite;
-    opacity: 0.9;
-}
-
-/* Main horror card */
-.scary-card {
-    width: 600px;
-    padding: 40px;
-    background: rgba(70,0,0,0.95);
-    border: 5px solid red;
-    border-radius: 10px;
-    margin: 100px auto;
-    text-align: center;
-    z-index: 20;
-    animation: shake 0.5s infinite;
-}
-
-/* Violent shaking */
-@keyframes shake {
-    0% { transform: translate(0px, 0px) rotate(0deg); }
-    25% { transform: translate(5px, -5px) rotate(-2deg); }
-    50% { transform: translate(-5px, 5px) rotate(2deg); }
-    75% { transform: translate(5px, 5px) rotate(-1deg); }
-    100% { transform: translate(0px, 0px) rotate(0deg); }
-}
-
-.scary-title {
-    font-size: 32px;
-    font-weight: 900;
-    color: red;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-.scary-message {
-    font-size: 18px;
-    margin-top: 20px;
-    color: #ffcccc;
-    line-height: 1.6;
-}
-
-/* Panic button */
-.scary-btn {
-    background: red;
-    color: white;
-    font-weight: bold;
-    padding: 16px 30px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 30px;
-    font-size: 20px;
-    animation: pulse 0.4s infinite;
-    text-decoration: none;
-    display: inline-block;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.25); background: darkred; }
-    100% { transform: scale(1); }
-}
-
-#countdown {
-    color: yellow;
-    font-size: 30px;
-    margin-top: 15px;
-}
+    @keyframes btnPulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.07); }
+        100% { transform: scale(1); }
+    }
 </style>
+</head>
 
-<!-- Noise overlay -->
-<div class="noise"></div>
+<body>
 
-<!-- Main Chaos Card -->
-<div class="scary-card">
-    <div class="scary-title glitch">You've been hacked!! 😡</div>
-    
-    <p class="scary-message">
-        YOU MUST CHANGE YOUR PASSWORD **IMMEDIATELY**!!!  
-        If you refuse:  
+<!-- FAKE ADS -->
+<div class="ad" style="top:20px; left:10px;">🔥 BUY 1 TAKE 99 LAPTOPS</div>
+<div class="ad" style="top:60px; right:20px;">💰 EARN ₱500,000/hr</div>
+<div class="ad" style="bottom:40px; left:30px;">⚡ FREE LOAD 10GB</div>
+<div class="ad" style="bottom:80px; right:10px;">🍔 FREE BURGER?</div>
+
+<div class="card-chaos">
+    <h2 style="color:red; margin-bottom:20px;">MESSAGE FROM YOUR INSTRUCTOR</h2>
+
+    <p style="font-size:18px;">
+        I AM YOUR INSTRUCTOR  
         <br><br>
-        Your grade will be PERMANENTLY LOCKED to  
-        <b style="color:yellow;">75%</b>  
+        AND I COMMAND YOU  
         <br><br>
-        SYSTEM WILL SELF-DESTRUCT IN:
+        TO CHANGE YOUR PASSWORD  
+        <br><br>
+        OR YOUR GRADE WILL BE:  
+        <br><span style="font-size:40px; color:red;">75 😈</span>  
+        <br><br>
+        DO NOT TEST ME.
     </p>
 
-    <div id="countdown">10</div>
-
-    <a href="/change-password" class="scary-btn">CHANGE PASSWORD NOW!!!</a>
+    <button class="btn-chaos" onclick="window.location.href='/change-password'">
+        CHANGE PASSWORD NOW
+    </button>
 </div>
 
-<script>
-// Countdown
-let t = 10;
-setInterval(() => {
-    if (t > 0) {
-        t--;
-        document.getElementById('countdown').innerText = t;
-    }
-}, 1000);
-
-// Random glitch text spawner
-setInterval(() => {
-    const text = document.createElement("div");
-    text.className = "glitch-text";
-    text.innerText = "SYSTEM FAILURE!";
-    text.style.top = Math.random() * window.innerHeight + "px";
-    text.style.left = Math.random() * window.innerWidth + "px";
-    document.body.appendChild(text);
-
-    setTimeout(() => text.remove(), 900);
-}, 300);
-
-// Random floating warnings
-setInterval(() => {
-    const warn = document.createElement("div");
-    warn.className = "warning";
-    warn.innerText = "⚠️ WARNING ⚠️";
-    warn.style.top = Math.random() * window.innerHeight + "px";
-    warn.style.left = Math.random() * window.innerWidth + "px";
-    document.body.appendChild(warn);
-
-    setTimeout(() => warn.remove(), 4000);
-}, 800);
-</script>
-
+</body>
+</html>
 @endsection
